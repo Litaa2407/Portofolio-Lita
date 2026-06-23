@@ -1226,6 +1226,9 @@ body.dark-ambient .log-role.bg-stone-100 {
   background-color: rgba(120, 113, 108, 0.15) !important;
   color: #a8a29e !important;
 }
+body.dark-ambient div.bg-slate-100 {
+  background-color: rgba(19, 18, 17, 0.8) !important;
+}
 
 /* Stack Tag Dark Mode Overrides */
 body.dark-ambient .stack-tag {
