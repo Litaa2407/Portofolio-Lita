@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>room.ukwms.ac.id — Project Detail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="text-slate-900">
+  <!-- Interactive cursor glow spotlight -->
+  <div id="cursor-glow"></div>
+  <main class="min-h-screen px-6 py-16">
+    <div class="mx-auto max-w-5xl rounded-[32px] border border-slate-200 bg-white/95 p-10 shadow-2xl">
+      <a href="index.html" class="mb-6 inline-flex items-center gap-2 text-sm font-medium text-slate-700 hover:text-slate-950">
+        ← Kembali ke Portfolio
+      </a>
+      <header class="mb-10">
+        <span class="text-sm font-medium uppercase tracking-[0.24em] text-amber-600">Project Detail</span>
+        <h1 class="mt-4 text-4xl font-semibold tracking-tight text-slate-950">room.ukwms.ac.id</h1>
+        <p class="mt-4 max-w-3xl text-base leading-8 text-slate-600">Sistem manajemen peminjaman ruang dan fasilitas kampus terpadu Universitas Katolik Widya Mandala Surabaya berbasis web.</p>
+      </header>
+      <div class="grid gap-8 lg:grid-cols-[1.3fr_0.9fr]">
+        <div class="space-y-8">
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-slate-950">Ringkasan</h2>
+            <p class="text-slate-600"><strong>room.ukwms.ac.id</strong> adalah portal internal kampus yang mengotomatisasi peminjaman ruang kelas, auditorium, laboratorium, dan fasilitas penunjang di UKWMS. Proyek ini mendigitalisasi birokrasi peminjaman fisik yang sebelumnya rumit menjadi sistem reservasi mandiri (self-service) secara real-time untuk mahasiswa dan dosen.</p>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-slate-950">Peran Saya (Full-Stack)</h2>
+            <ul class="list-disc space-y-3 pl-5 text-slate-600">
+              <li><strong>Frontend Next.js (SSR)</strong>: Mengembangkan visualisasi jadwal okupansi ruangan interaktif berbasis Next.js dengan Server-Side Rendering (SSR) untuk memastikan render kalender ribuan jadwal perkuliahan berjalan instan dan SEO-friendly.</li>
+              <li><strong>Backend API Golang</strong>: Merancang dan membangun RESTful API berkinerja tinggi menggunakan Golang (Gin framework) untuk menangani jutaan permintaan pemrosesan status reservasi ruangan secara real-time.</li>
+              <li><strong>Pencegahan Konflik Peminjaman</strong>: Mengimplementasikan sistem locking dan penanganan konkurensi (Goroutines & Channels) di Golang untuk memvalidasi bentrok jadwal secara presisi pada tingkat database.</li>
+              <li><strong>Integrasi Client-Server</strong>: Menghubungkan state management aplikasi Next.js dengan API Golang secara efisien serta menghubungkan backend ke database PostgreSQL.</li>
+            </ul>
+          </section>
+
+          <section class="space-y-4">
+            <h2 class="text-2xl font-semibold text-slate-950">Highlight Fitur</h2>
+            <div class="space-y-3 text-slate-600">
+              <p class="font-semibold text-slate-950">• Kalender Interaktif Next.js</p>
+              <p>Membantu civitas akademika melihat ketersediaan ruangan per jam dengan render antarmuka yang dinamis, responsif, dan ringan.</p>
+              <p class="font-semibold text-slate-950">• Concurrency Room Locking</p>
+              <p>Perlindungan anti-double booking berbasis backend Golang untuk mengunci ruangan secara instan ketika ada dua pihak mengajukan di detik yang sama.</p>
+              <p class="font-semibold text-slate-950">• Persetujuan Birokrasi Digital</p>
+              <p>Alur pengajuan izin secara otomatis diteruskan ke Kaprodi/Dekan terkait untuk persetujuan cepat.</p>
+            </div>
+          </section>
+        </div>
+
+        <aside class="space-y-6 rounded-[28px] border border-slate-200 bg-slate-50 p-6 shadow-sm">
+          <img src="mockup-room.jpg" alt="Screenshot room.ukwms.ac.id" class="w-full rounded-[24px] object-cover shadow-lg" />
+          <div class="space-y-4">
+            <div>
+              <h3 class="text-lg font-semibold text-slate-950">Teknologi</h3>
+              <div class="mt-3 flex flex-wrap gap-2 text-sm text-slate-600">
+                <span class="rounded-full bg-white px-3 py-1 shadow-sm font-semibold text-slate-800">Next.js</span>
+                <span class="rounded-full bg-white px-3 py-1 shadow-sm font-semibold text-sky-600">Golang</span>
+                <span class="rounded-full bg-white px-3 py-1 shadow-sm">PostgreSQL</span>
+                <span class="rounded-full bg-white px-3 py-1 shadow-sm">Tailwind CSS</span>
+              </div>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-950">Tantangan</h3>
+              <p class="text-slate-600">Menyajikan jadwal pemakaian ruang kuliah yang sangat padat secara akurat serta memitigasi bentrok peminjaman ruangan yang sering terjadi dalam pemrosesan bersamaan (concurrent booking).</p>
+            </div>
+            <div>
+              <h3 class="text-lg font-semibold text-slate-950">Hasil</h3>
+              <p class="text-slate-600">Mempersingkat alur birokrasi peminjaman dari rata-rata 2 hari menjadi kurang dari 5 menit secara digital.</p>
+            </div>
+          </div>
+        </aside>
+      </div>
+      
+      <!-- Next/Prev Project Navigation -->
+      <div class="mt-12 pt-8 border-t border-slate-200 dark:border-stone-800 flex items-center justify-between gap-4 font-mono text-xs uppercase tracking-wider font-semibold">
+        <a href="orkestra.html" class="flex items-center gap-2 text-slate-500 hover:text-amber-600 transition-colors">
+          ← Proyek Sebelumnya: ORKESTRA
+        </a>
+        <a href="index.html" class="text-slate-400 hover:text-slate-900 dark:hover:text-white transition-colors">
+          Kembali ke Beranda
+        </a>
+      </div>
+    </div>
+  </main>
+  <script src="scripts.js" defer></script>
+</body>
+</html>

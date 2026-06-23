@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Elizabeth Yulita — Portfolio</title>
+  <meta name="description" content="Portfolio Elizabeth Yulita — Full-Stack & Mobile Developer">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap"
+    rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="text-slate-900">
+
+  <!-- Interactive cursor glow spotlight -->
+  <div id="cursor-glow"></div>
+
+  <div id="page-loader" class="fixed inset-0 z-[999] flex items-center justify-center">
+    <div
+      class="loader-scene flex flex-col items-center gap-8 rounded-[32px] px-10 py-12 text-center max-w-[420px] w-[90%]">
+
+      <!-- Bulb Container -->
+      <div class="bulb-container relative flex flex-col items-center justify-center h-32 w-32">
+        <!-- Hanging wire -->
+        <div class="w-[2px] h-10 bg-gradient-to-b from-stone-600 to-stone-500 absolute top-0"></div>
+
+        <!-- Bulb body -->
+        <div class="light-bulb-interactive absolute top-8 transition-all duration-500">
+          <div class="bulb-cap"></div>
+          <div class="bulb-glass"></div>
+          <div class="bulb-filament"></div>
+        </div>
+
+        <!-- Glow rings around the bulb -->
+        <div class="bulb-glow-ring ring-1"></div>
+        <div class="bulb-glow-ring ring-2"></div>
+        <div class="bulb-glow-ring ring-3"></div>
+      </div>
+
+      <!-- Text and Progress -->
+      <div class="space-y-5 w-full">
+        <div class="loader-status-container min-h-[56px] flex flex-col items-center justify-center">
+          <p id="loader-title"
+            class="text-xs font-mono uppercase tracking-[0.25em] text-amber-500 font-semibold transition-all duration-300">
+            Menghubungkan Benang Cahaya...</p>
+          <p id="loader-percent" class="text-[11px] font-mono text-stone-500 mt-1">0%</p>
+        </div>
+
+        <!-- Elegant Progress Bar -->
+        <div class="w-full h-[3px] bg-stone-800 rounded-full overflow-hidden relative">
+          <div id="loader-progress"
+            class="h-full bg-gradient-to-r from-amber-600 via-amber-400 to-amber-500 w-0 transition-all duration-150 ease-out shadow-[0_0_10px_#f59e0b]">
+          </div>
+        </div>
+
+        <p id="loader-copy" class="text-xs text-stone-400 max-w-xs mx-auto leading-relaxed transition-all duration-500">
+          Suhu tabung dihangatkan, bersiap menerangi portofolio Elizabeth Yulita.
+        </p>
+      </div>
+
+      <!-- Interactive Button (Hidden initially) -->
+      <div class="h-14 w-full flex items-center justify-center mt-2">
+        <button id="loader-btn"
+          class="hidden opacity-0 transform translate-y-4 scale-95 group relative flex items-center gap-3 px-8 py-3.5 rounded-full bg-gradient-to-r from-amber-600 to-amber-500 text-white font-mono text-xs uppercase tracking-wider font-semibold shadow-[0_0_30px_rgba(245,158,11,0.2)] hover:shadow-[0_0_40px_rgba(245,158,11,0.45)] hover:from-amber-500 hover:to-amber-400 transition-all duration-300 active:scale-95 focus:outline-none">
+          <span
+            class="absolute inset-0 w-full h-full rounded-full bg-white/10 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500 origin-left"></span>
+          <span class="relative flex items-center gap-2">
+            <span>Nyalakan Lampu &amp; Masuk</span>
+            <svg class="w-3.5 h-3.5 transform group-hover:translate-x-1 transition-transform" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 10V3L4 14h7v7l9-11h-7z" />
+            </svg>
+          </span>
+        </button>
+      </div>
+
+      <!-- Soft hint below the button -->
+      <p id="loader-hint"
+        class="hidden opacity-0 text-[10px] font-mono text-stone-500 uppercase tracking-[0.18em] transition-opacity duration-700 mt-2 select-none">
+        Atau klik di mana saja untuk masuk
+      </p>
+
+    </div>
+
+    <!-- Massive flash effect element -->
+    <div class="light-flash-overlay"></div>
+  </div>
+
+  <nav class="sticky top-0 z-50 bg-white/90 backdrop-blur-xl border-b border-slate-200 shadow-sm">
+    <div class="wrap nav-inner mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+      <div class="nav-mark font-mono text-sm font-medium tracking-tight text-slate-900">Portofolio <span
+          class="text-amber-600">Lita</span></div>
+      <div class="nav-group flex flex-wrap items-center justify-end gap-4">
+        <ul class="nav-links flex flex-wrap items-center gap-5 text-sm text-slate-600">
+          <li><a class="hover:text-slate-900 transition" href="#about">tentang</a></li>
+          <li><a class="hover:text-slate-900 transition" href="#projects">project</a></li>
+          <li><a class="hover:text-slate-900 transition" href="#skills">skill</a></li>
+          <li><a class="hover:text-slate-900 transition" href="#academic-org">organisasi &amp; jurnal</a></li>
+        </ul>
+        <button id="ambient-toggle"
+          class="flex items-center justify-center p-2 rounded-full text-slate-600 hover:text-amber-600 hover:bg-slate-100 transition-all duration-300 focus:outline-none"
+          aria-label="Toggle Warm Ambient Mode">
+          <svg id="ambient-bulb-icon" class="w-5 h-5 transition-transform duration-500" fill="none"
+            stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+              d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
+          </svg>
+        </button>
+        <a class="nav-cta rounded-full bg-amber-600 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+          href="#contact">hubungi</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-copy">
+        <div class="eyebrow flex items-center gap-2">
+          <span class="relative flex h-2 w-2">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+          </span>
+        </div>
+        <h1 class="title">Elizabeth<br>Yulita Abadi<span class="accent">.</span></h1>
+        <p
+          class="hero-role font-mono text-sm uppercase tracking-[0.22em] text-amber-600 font-semibold min-h-[24px] mt-2 mb-1">
+          <span id="typewriter-text"></span><span class="animate-pulse">|</span>
+        </p>
+        <p class="thesis">Mahasiswa Informatika Universitas Katolik Widya Mandala Surabaya semester 5 yang memiliki
+          minat pada Software Development. Memiliki pengalaman dalam
+          pembangunan website serta aktif dalam organisasi dan kegiatan laboratorium. Terbiasa menggunakan teknologi web
+          modern seperti HTML, CSS, JavaScript, React, Vue, dan Vite, serta memiliki pemahaman backend menggunakan
+          Golang dan Spring Boot.</p>
+        <div class="mt-4 flex flex-wrap items-center gap-4">
+          <button id="cv-btn"
+            class="group relative flex items-center gap-2.5 px-6 py-3 rounded-full bg-slate-900 text-white font-mono text-xs uppercase tracking-wider font-semibold shadow-md hover:bg-slate-800 hover:shadow-lg transition-all duration-300 active:scale-95 focus:outline-none dark:bg-stone-800 dark:hover:bg-stone-700">
+            <span
+              class="btn-spinner hidden w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+            <svg class="btn-icon w-4 h-4 text-amber-500 transition-transform group-hover:translate-y-0.5" fill="none"
+              stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5"
+                d="M12 10v6m0 0l-3-3m3 3l3-3m2 8H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+            </svg>
+            <span id="cv-btn-text">Unduh / Lihat CV</span>
+          </button>
+        </div>
+        <div class="hero-meta">
+          <span class="pill">Universitas Katolik Widya Mandala Surabaya</span>
+          <span class="pill">Informatika · Semester 5</span>
+          <span class="pill">Full-Stack &amp; Mobile</span>
+        </div>
+      </div>
+      <div class="hero-photo-wrap">
+        <img class="hero-photo" src="foto_profile.JPG" alt="Elizabeth Yulita" />
+      </div>
+    </div>
+  </header>
+
+  <section id="about">
+    <div class="wrap mx-auto max-w-6xl px-6">
+      <div class="section-head flex flex-wrap items-baseline gap-4 mb-10 scroll-reveal">
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-950">Tentang</h2>
+        <span class="tag text-sm text-slate-500">// 01</span>
+      </div>
+      <div
+        class="about-text rounded-[28px] border border-slate-200 bg-white/90 p-10 shadow-xl text-base leading-8 text-slate-600 scroll-reveal">
+        <p> Saya adalah seseorang yang senang belajar dan mengeksplorasi teknologi baru dalam pengembangan perangkat
+          lunak. Saya menikmati proses membangun aplikasi web, mulai dari merancang pengalaman pengguna hingga
+          mengembangkan fitur yang dapat memberikan nilai bagi pengguna. Melalui berbagai proyek, organisasi, dan
+          pengalaman sebagai asisten laboratorium, saya terus mengembangkan kemampuan teknis, komunikasi, dan kolaborasi
+          untuk menjadi software developer yang lebih baik.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="wrap mx-auto max-w-6xl px-6">
+      <div class="section-head flex flex-wrap items-baseline gap-4 mb-10 scroll-reveal">
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-950">Project Log</h2>
+        <span class="tag text-sm text-slate-500">// 02</span>
+      </div>
+      <div class="projects-grid scroll-reveal">
+        <a href="orkestra.html" data-project="orkestra" class="group block stagger-reveal project-card-link">
+          <div class="log-entry">
+            <div>
+              <div class="log-head flex flex-wrap items-center justify-between gap-3 mb-4">
+                <span class="log-title text-xl font-semibold text-slate-950">ORKESTRA</span>
+                <span
+                  class="log-role rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-700">Full-stack</span>
+              </div>
+              <p class="log-sub mb-4 text-slate-600">Aplikasi manajemen keuangan organisasi mahasiswa — proyek kelompok,
+                UAS Pemrograman Mobile</p>
+              <div class="stack-row mb-4 flex flex-wrap gap-2">
+                <span class="stack-tag tag-flutter">Flutter</span>
+                <span class="stack-tag tag-spring">Spring Boot</span>
+                <span class="stack-tag tag-postgres">PostgreSQL</span>
+                <span class="stack-tag tag-api">OpenRouter API</span>
+              </div>
+            </div>
+            <div class="log-links mt-4 text-sm text-slate-500">Klik untuk melihat detail proyek</div>
+          </div>
+        </a>
+
+        <a href="room-ukwms.html" data-project="room-ukwms" class="group block stagger-reveal project-card-link">
+          <div class="log-entry">
+            <div>
+              <div class="log-head flex flex-wrap items-center justify-between gap-3 mb-4">
+                <span class="log-title text-xl font-semibold text-slate-950">room.ukwms.ac.id</span>
+                <span
+                  class="log-role rounded-full bg-slate-100 px-3 py-1 text-sm font-medium text-slate-700">Full-stack</span>
+              </div>
+              <p class="log-sub mb-4 text-slate-600">Sistem manajemen peminjaman ruang &amp; fasilitas kampus</p>
+              <div class="stack-row mb-4 flex flex-wrap gap-2">
+                <span class="stack-tag tag-nextjs">Next.js</span>
+                <span class="stack-tag tag-golang">Golang</span>
+              </div>
+            </div>
+            <div class="log-links mt-4 text-sm text-slate-500">Klik untuk melihat detail proyek</div>
+          </div>
+        </a>
+
+        <div class="group block stagger-reveal cursor-not-allowed">
+          <div class="log-entry opacity-75 hover:opacity-90 transition-opacity">
+            <div>
+              <div class="log-head flex flex-wrap items-center justify-between gap-3 mb-4">
+                <span class="log-title text-xl font-semibold text-slate-950">CodePath</span>
+                <span class="log-role rounded-full bg-stone-100 px-3 py-1 text-sm font-medium text-stone-600">In
+                  progress</span>
+              </div>
+              <p class="log-sub mb-4 text-slate-600">Konsep platform EdTech untuk siswa SMA di Bali — disiapkan untuk
+                INVENTION 2026, Universitas Udayana</p>
+              <div class="stack-row mb-4 flex flex-wrap gap-2">
+                <span class="stack-tag tag-html">HTML</span>
+                <span class="stack-tag tag-css">CSS</span>
+                <span class="stack-tag tag-js">Vanilla JS</span>
+              </div>
+            </div>
+            <div class="log-links mt-4 text-sm text-amber-600 font-semibold font-mono">Segera Hadir / In Development
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="wrap mx-auto max-w-6xl px-6">
+      <div class="section-head flex flex-wrap items-baseline gap-4 mb-10 scroll-reveal">
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-950">Skill</h2>
+        <span class="tag text-sm text-slate-500">// 03</span>
+      </div>
+      <div class="skill-grid scroll-reveal">
+        <div class="skill-cat stagger-reveal">
+          <h3>Frontend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge"
+              style="--hover-color: #e34c26; --hover-glow: rgba(227, 76, 38, 0.35); --hover-text: #fff;">HTML &amp;
+              CSS</span>
+            <span class="skill-badge"
+              style="--hover-color: #f7df1e; --hover-glow: rgba(247, 223, 30, 0.35); --hover-text: #1c1b1a;">JavaScript</span>
+            <span class="skill-badge"
+              style="--hover-color: #00d8ff; --hover-glow: rgba(0, 216, 255, 0.35); --hover-text: #1c1b1a;">React</span>
+            <span class="skill-badge"
+              style="--hover-color: #42b883; --hover-glow: rgba(66, 184, 131, 0.35); --hover-text: #fff;">Vue.js</span>
+          </div>
+        </div>
+
+        <div class="skill-cat stagger-reveal">
+          <h3>Backend</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge"
+              style="--hover-color: #6db33f; --hover-glow: rgba(109, 179, 63, 0.35); --hover-text: #fff;">Java (Spring
+              Boot)</span>
+            <span class="skill-badge"
+              style="--hover-color: #00add8; --hover-glow: rgba(0, 173, 216, 0.35); --hover-text: #fff;">Golang</span>
+          </div>
+        </div>
+
+        <div class="skill-cat stagger-reveal">
+          <h3>Mobile</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge"
+              style="--hover-color: #0284c7; --hover-glow: rgba(2, 132, 199, 0.35); --hover-text: #fff;">Flutter &amp;
+              Dart</span>
+          </div>
+        </div>
+
+        <div class="skill-cat stagger-reveal">
+          <h3>Database</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge"
+              style="--hover-color: #f29111; --hover-glow: rgba(242, 145, 17, 0.35); --hover-text: #fff;">SQL</span>
+            <span class="skill-badge"
+              style="--hover-color: #336791; --hover-glow: rgba(51, 103, 145, 0.35); --hover-text: #fff;">PostgreSQL</span>
+          </div>
+        </div>
+
+        <div class="skill-cat stagger-reveal">
+          <h3>Tools</h3>
+          <div class="flex flex-wrap gap-2">
+            <span class="skill-badge"
+              style="--hover-color: #24292e; --hover-glow: rgba(36, 41, 46, 0.35); --hover-text: #fff;">Git &amp;
+              GitHub</span>
+            <span class="skill-badge"
+              style="--hover-color: #007acc; --hover-glow: rgba(0, 122, 204, 0.35); --hover-text: #fff;">VS Code</span>
+            <span class="skill-badge"
+              style="--hover-color: #00c4cc; --hover-glow: rgba(0, 196, 204, 0.35); --hover-text: #fff;">Canva</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="academic-org">
+    <div class="wrap mx-auto max-w-6xl px-6">
+      <div class="grid gap-10 lg:grid-cols-2">
+        <!-- Pengalaman Organisasi -->
+        <div class="space-y-6 scroll-reveal">
+          <div class="section-head flex items-baseline gap-4 mb-6">
+            <h2 class="text-3xl font-semibold tracking-tight text-slate-950">Organisasi</h2>
+            <span class="tag text-sm text-slate-500">// 04</span>
+          </div>
+          <div class="space-y-4">
+            <div class="log-entry">
+              <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                <h3 class="text-lg font-semibold text-slate-950">Ketua HMPS Informatika</h3>
+                <span
+                  class="text-xs font-mono text-amber-600 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full dark:bg-amber-950/30">Himpunan
+                  Mahasiswa</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400 block mb-3">Periode 2026 / 2027</span>
+              <p class="text-sm text-slate-600 leading-relaxed">Memimpin seluruh program kerja Himpunan,
+                mengoordinasikan jembatan komunikasi strategis antara mahasiswa dengan birokrasi program studi, serta
+                mengarahkan visi pengembangan kepemimpinan mahasiswa Informatika.</p>
+            </div>
+            <div class="log-entry">
+              <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                <h3 class="text-lg font-semibold text-slate-950">Sekretaris HMPS Informatika</h3>
+                <span
+                  class="text-xs font-mono text-amber-600 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full dark:bg-amber-950/30">Himpunan
+                  Mahasiswa</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400 block mb-3">Periode 2025 / 2026</span>
+              <p class="text-sm text-slate-600 leading-relaxed">Mengelola administrasi persuratan Himpunan, menyusun
+                dokumentasi rapat (notulensi) dan laporan pertanggungjawaban kegiatan, serta mengatur jadwal agenda
+                kerja kepengurusan.</p>
+            </div>
+            <div class="log-entry">
+              <div class="flex justify-between items-start mb-2 flex-wrap gap-2">
+                <h3 class="text-lg font-semibold text-slate-950">Volunteer Sekretaris</h3>
+                <span
+                  class="text-xs font-mono text-amber-600 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full dark:bg-amber-950/30">Titik
+                  Wepose</span>
+              </div>
+              <span class="text-xs font-mono text-slate-400 block mb-3">Periode 2025 / 2026</span>
+              <p class="text-sm text-slate-600 leading-relaxed">Membantu tata kelola administrasi kegiatan
+                sosial/kemasyarakatan, mendokumentasikan kegiatan kerelawanan, serta menyusun laporan dokumentasi
+                kegiatan lapangan.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Publikasi & Jurnal -->
+        <div class="space-y-6 scroll-reveal">
+          <div class="section-head flex items-baseline gap-4 mb-6">
+            <h2 class="text-3xl font-semibold tracking-tight text-slate-950">Publikasi &amp; Jurnal</h2>
+            <span class="tag text-sm text-slate-500">// 05</span>
+          </div>
+          <div class="space-y-4">
+            <div class="log-entry">
+              <div class="mb-2">
+                <span
+                  class="text-xs font-mono text-amber-600 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full dark:bg-amber-950/30">Jurnal
+                  Nasional JIFOTECH</span>
+                <h3 class="text-lg font-semibold text-slate-950 mt-2">
+                  <a href="http://journal.shantibhuana.ac.id/index.php/jifotech/article/view/1107" target="_blank"
+                    rel="noopener" class="hover:text-amber-600 transition-colors">
+                    "Evaluasi Empiris Arsitektur Pengendalian Konkurensi Sistem Pemesanan: Aplikasi, Basis Data, dan
+                    Hibrid"
+                  </a>
+                </h3>
+              </div>
+              <span class="text-xs font-mono text-slate-400 block mb-3">Published: JIFOTECH (Vol. 6, No. 1, April
+                2026)</span>
+              <p class="text-sm text-slate-600 leading-relaxed">Penelitian evaluasi empiris terhadap kinerja arsitektur
+                kontrol konkurensi (level aplikasi, level database, dan hibrid) dalam menangani pemesanan serempak
+                (concurrency) guna menghindari race condition.</p>
+            </div>
+            <div class="log-entry">
+              <div class="mb-2">
+                <span
+                  class="text-xs font-mono text-amber-600 font-semibold bg-amber-50 px-2.5 py-0.5 rounded-full dark:bg-amber-950/30">Jurnal
+                  Nasional JISEM</span>
+                <h3 class="text-lg font-semibold text-slate-950 mt-2">
+                  <a href="https://journal.ukwms.ac.id/index.php/jisem/article/view/7374" target="_blank" rel="noopener"
+                    class="hover:text-amber-600 transition-colors">
+                    "Pemanfaatan Bahasa Pemrograman Python Untuk Mengkonversi Suhu Celcius ke Fahrenheit, Reaumur, dan
+                    Kelvin"
+                  </a>
+                </h3>
+              </div>
+              <span class="text-xs font-mono text-slate-400 block mb-3">Published: JISEM (Vol. 1, No. 2, Februari
+                2026)</span>
+              <p class="text-sm text-slate-600 leading-relaxed">Rancang bangun program otomatisasi konversi suhu
+                menggunakan Python yang mengintegrasikan perulangan efisien untuk input data dan penanganan kesalahan
+                (try-except) untuk meminimalisir kesalahan pengguna.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="contact" id="contact">
+    <div class="wrap mx-auto max-w-6xl px-6">
+      <div class="rounded-[32px] border border-slate-200 bg-white/95 p-10 shadow-2xl scroll-reveal">
+        <h2 class="text-3xl font-semibold tracking-tight text-slate-950 sm:text-4xl">Mari terhubung.</h2>
+        <p class="mt-4 max-w-2xl text-base leading-8 text-slate-600">Terbuka untuk kesempatan magang di bidang web atau
+          mobile development.</p>
+        <div class="contact-links mt-8 flex flex-wrap gap-4">
+          <a class="rounded-full bg-amber-600 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-amber-700"
+            href="mailto:elizabethyulita316@gmail.com">Kirim Email</a>
+          <a class="rounded-full bg-emerald-500 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-600"
+            href="https://wa.me/6282241506433" target="_blank" rel="noopener">Chat WhatsApp</a>
+          <a class="rounded-full border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-700 shadow-sm transition hover:bg-slate-100"
+            href="https://instagram.com/eliza_litaa" target="_blank" rel="noopener">@Eliza_litaa</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Project Preview Modal (Lightbox) -->
+  <div id="project-modal"
+    class="fixed inset-0 z-[1000] flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-md opacity-0 pointer-events-none transition-all duration-300">
+    <div
+      class="modal-card relative w-full max-w-2xl rounded-[32px] border border-slate-200 bg-white/95 p-8 shadow-2xl scale-95 transition-all duration-300 overflow-y-auto max-h-[90vh] dark:bg-stone-900/95 dark:border-stone-800">
+      <!-- Close Button -->
+      <button id="modal-close"
+        class="absolute top-6 right-6 p-2 rounded-full text-slate-400 hover:text-slate-900 hover:bg-slate-100 transition-colors focus:outline-none dark:hover:bg-stone-800 dark:hover:text-white"
+        aria-label="Tutup">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+
+      <!-- Content -->
+      <div class="space-y-6">
+        <div>
+          <span id="modal-project-role"
+            class="text-[11px] font-mono uppercase tracking-[0.2em] text-amber-600 font-semibold">Role</span>
+          <h3 id="modal-project-title"
+            class="text-3xl font-semibold tracking-tight text-slate-950 mt-1 dark:text-white">Judul Proyek</h3>
+        </div>
+
+        <!-- Image Preview -->
+        <div
+          class="relative rounded-2xl overflow-hidden border border-slate-200 dark:border-stone-800 max-h-[260px] flex items-center justify-center bg-slate-100 dark:bg-stone-950">
+          <img id="modal-project-image" src="" alt="Pratinjau Proyek"
+            class="w-full h-full object-cover max-h-[260px]" />
+        </div>
+
+        <p id="modal-project-desc" class="text-slate-600 text-sm leading-relaxed dark:text-stone-300">Deskripsi singkat
+          proyek...</p>
+
+        <div>
+          <h4 class="text-xs font-mono uppercase tracking-wider text-slate-400 mb-2">Teknologi</h4>
+          <div id="modal-project-tech" class="flex flex-wrap gap-2">
+            <!-- Tech badges will be dynamically appended here -->
+          </div>
+        </div>
+
+        <div class="pt-4 flex items-center justify-end gap-3 border-t border-slate-100 dark:border-stone-800">
+          <button id="modal-cancel-btn"
+            class="px-6 py-2.5 rounded-full border border-slate-200 text-xs font-semibold text-slate-700 hover:bg-slate-100 transition-colors dark:border-stone-800 dark:text-stone-300 dark:hover:bg-stone-800">Tutup</button>
+          <a id="modal-view-btn" href=""
+            class="rounded-full bg-amber-600 px-6 py-2.5 text-xs font-semibold text-white shadow-sm transition hover:bg-amber-700">Lihat
+            Halaman Lengkap →</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast Notification for Email Clipboard Fallback -->
+  <div id="toast"
+    class="fixed bottom-6 left-1/2 -translate-x-1/2 z-[1000] flex items-center gap-3 px-6 py-3.5 rounded-2xl bg-slate-900/95 text-white text-xs font-mono shadow-[0_12px_40px_rgba(0,0,0,0.25)] border border-white/10 opacity-0 pointer-events-none translate-y-4 transition-all duration-300">
+    <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7" />
+    </svg>
+    <span id="toast-message">Email disalin ke clipboard!</span>
+  </div>
+
+  <!-- Floating Back to Top Button -->
+  <button id="back-to-top"
+    class="fixed bottom-6 right-6 z-[900] flex h-11 w-11 items-center justify-center rounded-full bg-amber-600 text-white shadow-lg transition-all duration-300 opacity-0 translate-y-4 pointer-events-none hover:bg-amber-500 hover:scale-110 active:scale-95"
+    aria-label="Back to Top">
+    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+    </svg>
+  </button>
+
+  <script src="scripts.js" defer></script>
+</body>
+
+</html>
