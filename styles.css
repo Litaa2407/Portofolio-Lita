@@ -608,6 +608,12 @@ section {
   flex-direction: column;
   height: 100%;
 }
+
+.log-entry.experience-compact {
+  height: auto;
+  padding: clamp(18px, 2vw, 22px) clamp(16px, 2.5vw, 24px);
+}
+
 .log-entry:hover {
   transform: translateY(-5px);
   border-color: var(--terracotta-dim);
@@ -1430,4 +1436,3 @@ body.dark-ambient #page-loader .light-bulb-interactive .bulb-glass {
   background: rgba(255, 255, 255, 0.03) !important;
   border: 2px solid rgba(255, 255, 255, 0.12) !important;
 }
-

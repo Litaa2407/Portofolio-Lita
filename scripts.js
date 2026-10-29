@@ -333,6 +333,14 @@ window.addEventListener('DOMContentLoaded', () => {
         image: 'mockup-room.jpg',
         tech: ['Next.js', 'Golang', 'PostgreSQL', 'Tailwind CSS'],
         link: 'room-ukwms.html'
+      },
+      'cyberacademy': {
+        title: 'Cyber Academy — Pixel Guardians',
+        role: 'Frontend Web Developer',
+        desc: 'Platform edukasi cybersecurity berbasis gamifikasi RPG dengan tujuh level petualangan, materi interaktif, beragam tantangan, dan sistem progres karakter.',
+        image: 'mockup-cyberacademy.png',
+        tech: ['React', 'Vite', 'JavaScript', 'CSS', 'Firebase Authentication', 'React Context API'],
+        link: 'codepath.html'
       }
     };
 
